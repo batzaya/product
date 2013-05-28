@@ -12,6 +12,7 @@
 </head>
 <body>
     <div style="width: 1200px">
+    <a href="<?php echo user_uri('')?>">Нүүр</a>
     <?php echo $content;?>
     </div>
 </body>

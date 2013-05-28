@@ -1,5 +1,4 @@
 <?php ob_start();?>
-<a href="<?php echo user_uri('')?>">Бараа</a>
 <form action="" method="POST" style="margin-left:300px">
     Таны нэр: <br/><input type="text" name="name"/><br/>
     Таны хаяг:<br/> <textarea name="address" rows="10" cols="30"></textarea><br/>

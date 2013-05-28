@@ -1,8 +1,7 @@
 <?php ob_start();?>
 <table style="margin-left:500px">
-<a href="<?php echo user_uri('')?>">Бараа</a>   
-<?php foreach ($products as $product):?>
     <th>Бараа<hr/></th>
+<?php foreach ($products as $product):?>
     <tr><td>Нэр: <?php echo $product['product_name'];?></td></tr>
     <tr><td>Төрөл: <?php echo $product['type'];?></td></tr>
     <tr><td>Тайлбар: <?php echo $product['content'];?></td></tr>
