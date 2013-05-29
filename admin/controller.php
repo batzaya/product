@@ -16,7 +16,7 @@ function login(){
 
 
 function logout(){
-    render('logout');
+    render('logout', array());
     session_destroy();
 }
 

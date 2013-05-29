@@ -8,7 +8,10 @@
         Хэрэглэгчийн нэр :<input type="text" name="name" value=""/><br/>
         Нууц үг :<input type="password" name="password" style="margin-left:70px"/><br/>
         <input type="submit" value="нэвтрэх" name="login" style="margin-left:240px"/></br>
-        <?php echo $error_msg; ?>
+<?php 
+if (isset($error_msg))
+    echo $error_msg; 
+?>
     </form>
 </body>
 </html>
