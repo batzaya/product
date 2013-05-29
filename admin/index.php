@@ -5,7 +5,7 @@ session_start();
 $dir = dirname(__FILE__);
 require_once($dir.'/../model.php');
 require_once($dir.'/controller.php');
-require_once($dir.'/help_functions.php');
+require_once($dir.'/../help_functions.php');
 
 
 if(is_logged_in('')){

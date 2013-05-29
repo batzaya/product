@@ -8,7 +8,7 @@ function connection(){
 }
 
 
-function sql_close(){
+function sql_close($con){
     mysqli_close($con);
 }
 
@@ -20,7 +20,7 @@ function get_product_by_id($id){
     $result = mysqli_query($con, $query);
     $product = mysqli_fetch_assoc($result);
 
-    sql_close();
+    sql_close($con);
 
     return $product;
 }
@@ -32,7 +32,7 @@ function create_product($name, $type, $price, $content){
              '".date("Y-m-d H:i:s")."')";
     $con = connection();
     mysqli_query($con, $query);
-    sql_close();
+    sql_close($con);
 }
 
 
@@ -42,7 +42,7 @@ function add_tender($name, $address, $id){
             '".$id."')";
     $con = connection();
     mysqli_query($con, $query);
-    sql_close();
+    sql_close($con);
 }
 
 function get_all_products(){
@@ -59,7 +59,7 @@ function delete_product($id){
     $id = intval($id);
     $con = connection();
     mysqli_query($con, "DELETE FROM product WHERE id= ".$id);
-    sql_close();
+    sql_close($con);
 }
 
 
@@ -117,7 +117,7 @@ function create_admin($name,$pass){
 
     $con = connection();
     mysqli_query($con, $query);
-    sql_close();
+    sql_close($con);
 }
 
 
@@ -137,7 +137,7 @@ function get_admin_by_id($id){
     $result = mysqli_query($con, $query);
     $admin = mysqli_fetch_assoc($result);
 
-    sql_close();
+    sql_close($con);
 
     return $admin;
 }
@@ -146,7 +146,7 @@ function delete_admin($id){
     $id = intval($id);
     $con = connection();
     mysqli_query($con, "DELETE FROM admin WHERE id = ".$id);
-    sql_close();
+    sql_close($con);
 }
 
 
@@ -154,6 +154,6 @@ function delete_tender($id){
     $id = intval($id);
     $con = connection();
     mysqli_query($con, "DELETE FROM tender WHERE id = ".$id);
-    sql_close();
+    sql_close($con);
 }
 ?>
