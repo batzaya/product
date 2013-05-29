@@ -1,6 +1,6 @@
 <?php
 function login(){
-    if ($_POST['login']) {
+    if (isset($_POST['login'])) {
         $login_ok = user_exists($_POST['name'], $_POST['password']);
         if($login_ok[0]){
             $_SESSION['login'] = true;
