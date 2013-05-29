@@ -2,16 +2,17 @@
 function login(){
     if (isset($_POST['login'])) {
         $login_ok = user_exists($_POST['name'], $_POST['password']);
-        if($login_ok[0]){
+        if ($login_ok[0]) {
             $_SESSION['login'] = true;
             list_of_products();
-            break;
-        }
-        else{
+        } else {
             $error_msg = "Таны нэр эсвэл нууц үг буруу байна.";
         }
     }
-    require_once('./template/login.php');
+
+    if (!is_logged_in()) {
+        require_once('./template/login.php');
+    }
 }
 
 

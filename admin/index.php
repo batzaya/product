@@ -8,7 +8,7 @@ require_once($dir.'/controller.php');
 require_once($dir.'/../help_functions.php');
 
 
-if(is_logged_in('')){
+if(is_logged_in()){
     
     if (uri_is('')){
         list_of_products();
