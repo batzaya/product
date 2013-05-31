@@ -1,8 +1,7 @@
 <a href="<?php echo admin_uri('/admin/add') ?>">+ Шинээр Админ нэмэх</a>
-<table>
+<table border="1" class="product">
     <tr>
         <th>Админы нэр</th>
-        <th></th>
         <th></th>
         <th></th>
     </tr>

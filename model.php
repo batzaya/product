@@ -27,7 +27,7 @@ function get_product_by_id($id){
 
 
 function create_product($name, $type, $price, $content){
-    $query = "INSERT INTO product (product_name, type, price, content, date) 
+    $query = "INSERT INTO product (name, type, price, content, date) 
              VALUES ('".$name."', '".$type."', '".$price."', '".$content."',
              '".date("Y-m-d H:i:s")."')";
     $con = connection();
@@ -36,21 +36,34 @@ function create_product($name, $type, $price, $content){
 }
 
 
-function add_tender($name, $address, $id){
-    $query = "INSERT INTO tender (user_name, address, date, product_id)
-            VALUES ('".$name."', '".$address."', '".date("Y-m-d H:i:s")."',
-            '".$id."')";
+function add_order($name, $address, $id){
+    $query = "INSERT INTO `order` (user_name, address, product_id, date)
+             VALUES ('".$name."', '".$address."', '".$id."', '".date("Y-m-d H:i:s")."')";
     $con = connection();
     mysqli_query($con, $query);
     sql_close($con);
 }
 
-function get_all_products(){
-    $rs = mysqli_query(connection(), "SELECT * FROM product ORDER BY date ASC");
+function get_all_products($start_limit, $stop_limit){
+    $rs = mysqli_query(connection(), "SELECT * FROM product ORDER BY date DESC
+          LIMIT ".$start_limit.", ".$stop_limit."");
     $products = array();
     while($product = mysqli_fetch_array($rs) ){
         $products[] = $product;
     }
+    return $products;
+}
+
+
+function get_find_result($search, $start_limit, $stop_limit){
+    $con = connection();
+    $rs = mysqli_query($con, "SELECT * FROM product WHERE name LIKE '%".$search."%' OR content LIKE '%".$search."%' 
+          LIMIT ".$start_limit.", ".$stop_limit."");
+    $products = array();
+    while($product = mysqli_fetch_array($rs)){
+        $products[] = $product;
+    }
+    sql_close($con);
     return $products;
 }
 
@@ -64,7 +77,7 @@ function delete_product($id){
 
 
 function update_product($id){
-    $query = "UPDATE product SET product_name = '%s', type = '%s', price = '%s',
+    $query = "UPDATE product SET name = '%s', type = '%s', price = '%s',
              content = '%s' WHERE id=%s";
     $sql = sprintf($query,
                    addslashes($_POST['name']),
@@ -86,6 +99,23 @@ function user_exists($name, $password){
 }
 
 
+function get_product_count($search=null){
+    $query = "SELECT COUNT(*) as num FROM product";
+    $count = mysqli_fetch_array(mysqli_query(connection(), $query));
+    $num_of_pro = $count['num'];
+    return $num_of_pro;
+}
+
+
+function get_find_count($search){
+    $query = "SELECT COUNT(*) as num FROM product WHERE name LIKE
+             '%".$search."%' OR content LIKE '%".$search."%'";
+    $count = mysqli_fetch_array(mysqli_query(connection(), $query));
+    $num_of_prod = $count['num'];
+    return $num_of_prod;
+}
+
+
 function get_all_admins(){
     $rs = mysqli_query(connection(), "SELECT * FROM admin");
     $admins = array();
@@ -96,18 +126,17 @@ function get_all_admins(){
 }
 
 
-function get_all_tender(){
-    $rs = mysqli_query(connection(), "SELECT t.user_name, t.address, t.date,
-          t.id, p.product_name, p.price
-          FROM tender as t
+function get_all_order(){
+    $rs = mysqli_query(connection(), "SELECT o.id, o.user_name, o.address, o.date, p.name, p.price
+          FROM `order` as o
           LEFT JOIN product as p
-          ON t.product_id = p.id
-          ORDER BY t.date");
-    $tenders = array();
-    while ($tender = mysqli_fetch_array($rs) ){
-        $tenders[] = $tender;
+          ON o.product_id = p.id
+          ORDER BY o.date");
+    $orders = array();
+    while ($order = mysqli_fetch_array($rs) ){
+        $orders[] = $order;
     }
-    return $tenders;
+    return $orders;
 }
 
 
@@ -150,10 +179,10 @@ function delete_admin($id){
 }
 
 
-function delete_tender($id){
+function delete_order($id){
     $id = intval($id);
     $con = connection();
-    mysqli_query($con, "DELETE FROM tender WHERE id = ".$id);
+    mysqli_query($con, "DELETE FROM `order` WHERE id = ".$id);
     sql_close($con);
 }
 ?>

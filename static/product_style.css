@@ -1,0 +1,33 @@
+form table tr td:first-child{
+    text-align: right;
+}
+
+table tr td:first-child{
+    text-align: left;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+td{
+    padding: 0px 0px 0px 0px;
+    text-align: left;
+}
+
+label{
+    margin-left: 50px;
+}
+
+.product td{
+    padding: 5px 30px 5px 30px;    
+}
+
+.search{
+    margin-left: -50px;
+    margin-top: -20px;
+}
+
+#product tr:first-child{
+    font-weight: bold;
+}

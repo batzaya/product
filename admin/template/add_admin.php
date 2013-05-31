@@ -1,12 +1,12 @@
 <form method="POST" action="">
     <table>
         <tr>
-            <td><label>Хэрэглэгчийн нэр:</label></td>
-            <td><input type="text" name="username"/></td>
+            <td><label for="username">Хэрэглэгчийн нэр:</label></td>
+            <td><input type="text" name="username" id="username"/></td>
         </tr>
         <tr>
-            <td><label>Нууц үг:</label></td>
-            <td><input type="password" name="password"></td>
+            <td><label for="password">Нууц үг:</label></td>
+            <td><input type="password" name="password" id="password"></td>
         </tr>
         <tr>
             <td></td>

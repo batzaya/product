@@ -42,12 +42,12 @@ if(is_logged_in()){
         remove_admin($_GET['id']);
     }
 
-    if (uri_is('/tender')) {
-        list_tender();
+    if (uri_is('/order')) {
+        list_order();
     }
 
-    if (uri_is('/tender/delete') && $_GET['id']) {
-        remove_tender($_GET['id']);
+    if (uri_is('/order/delete') && $_GET['id']) {
+        remove_order($_GET['id']);
     }
 
     if (uri_is('/logout')) {

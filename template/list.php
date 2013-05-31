@@ -1,14 +1,38 @@
 <?php ob_start();?>
-<table style="margin-left:500px">
-    <th>Бараа<hr/></th>
+<center class="search">
+    <form action="" method="GET">
+        <label for="search">Хайлт:</label>
+        <input type="text" id="search" name="search"/>
+        <input type="submit" value="хайх"/>
+    </form>
+    <h3>Бараа</h3>
+</center>
+<table class="product" id="product" border="0">
+    <tr>
+        <td>Нэр</td>
+        <td>Төрөл</td>
+        <td>Үнэ</td>
+    </tr>
 <?php foreach ($products as $product):?>
-    <tr><td>Нэр: <?php echo $product['product_name'];?></td></tr>
-    <tr><td>Төрөл: <?php echo $product['type'];?></td></tr>
-    <tr><td>Тайлбар: <?php echo $product['content'];?></td></tr>
-    <tr><td>Үнэ: <?php echo $product['price']; ?></td></tr>
-    <tr><td id="move"><a href="<?php echo user_uri('/buy?id='.$product['id']) ?>">Худалдаж авах</a><hr/></td></tr>
+    <tr>
+        <td><?php echo $product['name'];?></td>
+        <td><?php echo $product['type'];?></td>
+        <td><?php echo $product['price']; ?></td>
+        <td><a href="<?php echo user_uri('/buy?id='.$product['id']) ?>">Худалдаж авах</a></td>
+    </tr>
+        <td colspan="4"><?php echo $product['content'];?></td>
+    </tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
 <?php endforeach;?>
 </table>
-
+<center>
+    <?php if (!($pageno - 1 == 0)) { ?>
+        <a href="<?php echo user_uri('?pageno='.($pageno - 1).(isset($find) ? '&search='.$find : '')); ?>" >Өмнөх</a>
+    <?php } ?>
+    <?php if ($pageno <= $limit) { ?>
+        <a href="<?php echo user_uri('?pageno='.($pageno + 1).(isset($find) ? '&search='.$find : '')); ?>" >Дараах</a>
+    <?php } ?>
+</center>
 <?php $content = ob_get_clean();?>
 <?php require_once('layout.php');?>

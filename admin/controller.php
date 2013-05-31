@@ -23,7 +23,9 @@ function logout(){
 
 
 function list_of_products(){
-    $products = get_all_products();
+    $start_limit = 0;
+    $stop_limit = 8;
+    $products = get_all_products($start_limit, $stop_limit);
     render('product_list', array('products' => $products));
 }
 
@@ -81,14 +83,14 @@ function remove_admin($id){
 }
 
 
-function list_tender(){
-    $tenders = get_all_tender();
-    render('show_tender', array('tenders' => $tenders));
+function list_order(){
+    $orders = get_all_order();
+    render('show_order', array('orders' => $orders));
 }
 
 
-function remove_tender($id){
-    delete_tender($id);
-    header('Location: '.admin_uri('/tender'));
+function remove_order($id){
+    delete_order($id);
+    header('Location: '.admin_uri('/order'));
 }
 ?>
